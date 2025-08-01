@@ -1,0 +1,8 @@
+flask
+transformers
+torch
+sentencepiece
+protobuf
+requests
+python-dotenv
+pytest 
