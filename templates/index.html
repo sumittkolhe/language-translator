@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Language Translator - AI-Powered Translation</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <h1 class="title">
+                    <i class="fas fa-language"></i>
+                    Language Translator
+                </h1>
+                <p class="subtitle">AI-Powered Neural Machine Translation</p>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="translation-container">
+                <div class="language-selector">
+                    <div class="language-group">
+                        <label for="source-lang">From:</label>
+                        <select id="source-lang" class="language-select">
+                            {% for code, name in languages.items() %}
+                            <option value="{{ code }}" {% if code == 'en' %}selected{% endif %}>{{ name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    
+                    <button id="swap-languages" class="swap-btn" title="Swap languages">
+                        <i class="fas fa-exchange-alt"></i>
+                    </button>
+                    
+                    <div class="language-group">
+                        <label for="target-lang">To:</label>
+                        <select id="target-lang" class="language-select">
+                            {% for code, name in languages.items() %}
+                            <option value="{{ code }}" {% if code == 'es' %}selected{% endif %}>{{ name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+
+                <div class="text-areas">
+                    <div class="text-area-group">
+                        <div class="text-area-header">
+                            <span class="language-label">Source Text</span>
+                            <div class="text-controls">
+                                <button id="clear-source" class="control-btn" title="Clear text">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                                <button id="copy-source" class="control-btn" title="Copy text">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <textarea id="source-text" class="text-area" placeholder="Enter text to translate..."></textarea>
+                        <div class="char-count">
+                            <span id="source-count">0</span> characters
+                        </div>
+                    </div>
+
+                    <div class="text-area-group">
+                        <div class="text-area-header">
+                            <span class="language-label">Translation</span>
+                            <div class="text-controls">
+                                <button id="clear-target" class="control-btn" title="Clear text">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                                <button id="copy-target" class="control-btn" title="Copy text">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                                <button id="speak-target" class="control-btn" title="Speak text">
+                                    <i class="fas fa-volume-up"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <textarea id="target-text" class="text-area" placeholder="Translation will appear here..." readonly></textarea>
+                        <div class="char-count">
+                            <span id="target-count">0</span> characters
+                        </div>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button id="translate-btn" class="translate-btn">
+                        <i class="fas fa-language"></i>
+                        Translate
+                    </button>
+                    <button id="auto-translate" class="auto-translate-btn">
+                        <i class="fas fa-magic"></i>
+                        Auto Translate
+                    </button>
+                </div>
+            </div>
+
+            <div class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>Neural AI</h3>
+                    <p>Powered by state-of-the-art transformer models for accurate translations</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3>Multiple Languages</h3>
+                    <p>Support for 9 languages with high-quality translation models</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Fast & Reliable</h3>
+                    <p>Real-time translation with cached models for optimal performance</p>
+                </div>
+            </div>
+        </main>
+
+        <div id="loading-overlay" class="loading-overlay">
+            <div class="loading-spinner">
+                <div class="spinner"></div>
+                <p>Translating...</p>
+            </div>
+        </div>
+
+        <div id="notification" class="notification"></div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html> 
